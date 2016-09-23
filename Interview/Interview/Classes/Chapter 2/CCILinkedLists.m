@@ -33,11 +33,12 @@
     while (n != nil) {
         
         //object not found, add it to the set
-        if (![set containsObject:n.data]) {
-            [set addObject:n.data];
-            prev = n;            
-        } else {
+        if ([set containsObject:n.data]) {
             [list removeNode:n previousNode:prev];
+        } else {
+            [set addObject:n.data];
+            prev = n;
+            
         }
         
 

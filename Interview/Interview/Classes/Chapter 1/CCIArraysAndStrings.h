@@ -22,7 +22,7 @@ void reverse(char * buffer);
 + (BOOL) isString:(NSString*)string1 permutationOf:(NSString*)string2;
 
 //1.4
-+ (void) encodeSpaces:(NSMutableString*)string length:(NSInteger)n;
++ (NSString *) encodeSpaces:(NSMutableString*)string;
 
 //1.5
 + (NSString*) compress:(NSString*)input;
@@ -35,5 +35,7 @@ void reverse(char * buffer);
 
 //1.8
 + (BOOL) rotatableString:(NSString*)string hasSubstring:(NSString*)substring;
+
++ (NSArray *)possibleStrings:(NSString *)codedString;
 
 @end

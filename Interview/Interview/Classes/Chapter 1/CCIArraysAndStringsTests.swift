@@ -68,27 +68,30 @@ class CCIArraysAndStringsTests: XCTestCase {
     
     func test_1_4() {
         var inString = NSMutableString(string: "nospaces")
-        CCIArraysAndStrings.encodeSpaces(inString, length:"nospaces".lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
-        print("inString = \(inString)")
-        XCTAssertEqual(inString, "nospaces")
+        
+        XCTAssertEqual(CCIArraysAndStrings.encodeSpaces(inString), "nospaces")
         
         //test one spaces
-        inString = NSMutableString(string: "one space//")
-        CCIArraysAndStrings.encodeSpaces(inString, length:"one space".lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+        inString = NSMutableString(string: "one space")
+        CCIArraysAndStrings.encodeSpaces(inString)
         print("inString = \(inString)")
-        XCTAssertEqual(inString, "one%20space")
+        XCTAssertEqual(CCIArraysAndStrings.encodeSpaces(inString), "one%20space")
         
         //test two spaces -> !! this caught an error where I didn't move the ' ' replacement over to accommodate more spaces before this one
-        inString = NSMutableString(string: "two spaces here////")
-        CCIArraysAndStrings.encodeSpaces(inString, length:"two spaces here".lengthOfBytesUsingEncoding(NSUTF8StringEncoding))
+        inString = NSMutableString(string: "two spaces here")
+        CCIArraysAndStrings.encodeSpaces(inString)
         print("inString = \(inString)")
-        XCTAssertEqual(inString, "two%20spaces%20here")
+        XCTAssertEqual(CCIArraysAndStrings.encodeSpaces(inString), "two%20spaces%20here")
+        
+        inString = NSMutableString(string: "    ")
+        CCIArraysAndStrings.encodeSpaces(inString)
+        XCTAssertEqual(CCIArraysAndStrings.encodeSpaces(inString), "%20%20%20%20")
     }
     
     func test_1_5() {
         
-        var s = "aabcccddd"
-        var scompressed = "a2b1c3d3"
+        var s = "bcccdddeeffffff"
+        var scompressed = "zzbc3d3e2f6"
         var sc = CCIArraysAndStrings.compress(s)
         
         XCTAssertNotEqual(s, sc, "a string which can be compressed should not return the original string")
@@ -97,13 +100,23 @@ class CCIArraysAndStringsTests: XCTestCase {
             "a string which has been compressed should be shorter than the original string")
         
         s = "abc"
-        scompressed = "a1b1c1"
+        scompressed = "zzabc"
         sc = CCIArraysAndStrings.compress(s)
         
         XCTAssertEqual(s,sc)
         XCTAssertNotEqual(scompressed, sc)
         XCTAssertTrue(s.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == sc.lengthOfBytesUsingEncoding(NSUTF8StringEncoding),
             "a string which cannot be compressed should be equal to the length of the original string")
+        
+        s = "zza1b1c1d1"
+        scompressed = "zzz2a1b1c1d1"
+        sc = CCIArraysAndStrings.compress(s)
+        
+        XCTAssertEqual(s,sc)
+
+        XCTAssertEqual("zzabcdef9",CCIArraysAndStrings.compress("abcdefffffffff"))
+        XCTAssertEqual("zzabcdef9f",CCIArraysAndStrings.compress("abcdeffffffffff"))
+        
     }
     
 //TODO: learn how to test 1.6
@@ -164,4 +177,11 @@ class CCIArraysAndStringsTests: XCTestCase {
         
     }
 
+    func test_possible_chars() {
+        
+        
+        
+        print(CCIArraysAndStrings.possibleStrings("1123"))
+        
+    }
 }

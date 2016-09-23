@@ -8,15 +8,15 @@
 
 import Foundation
 
-@objc class TestClass {
+@objc class TestClass : NSObject {
     
     @objc let string : String = "something"
     
-    class func new() -> TestClass {
-        return TestClass()
-    }
+//    override class func new() -> TestClass {
+//        return TestClass()
+//    }
     
-    @objc func doSomething() {
+    func doSomething() {
         print("doing something")
     }
     

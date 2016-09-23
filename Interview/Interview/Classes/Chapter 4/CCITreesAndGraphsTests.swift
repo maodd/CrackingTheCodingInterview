@@ -128,8 +128,20 @@ class CCITreesAndGraphsTests: XCTestCase {
         XCTAssertEqual(bst.root.value as! Int, 2, "2 should be at the root")
         XCTAssertEqual(bst.root.left.value as! Int, 1, "1 should be to the left of 2")
         XCTAssertEqual(bst.root.right.value as! Int, 3, "3 should be to the right of 2")
+     
+        bst = tg.buildBSTFromObjects([1,2,3,4,5,6,7], sorted: true)
+        XCTAssertEqual(bst.root.value as! Int, 4)
+        XCTAssertEqual(bst.root.left.value as! Int, 2)
+        XCTAssertEqual(bst.root.right.value as! Int, 6)
+        
+        bst = tg.buildBSTFromObjects([1,2,3, 4, 5,6,7, 8, 9,10,11, 12, 13,14,15], sorted: true)
+        XCTAssertEqual(bst.root.value as! Int, 8)
+        XCTAssertEqual(bst.root.left.value as! Int, 4)
+        XCTAssertEqual(bst.root.right.value as! Int, 12)
     }
-    
+
+
+    // 4.3
     func test_nodesAtDepth() {
         let tg = CCITreesAndGraphs()
         let t = BinarySearchTree()
@@ -164,6 +176,7 @@ class CCITreesAndGraphsTests: XCTestCase {
 
     }
     
+    // 4.5
     func test_isBinarySearchTree() {
         let t = BinaryTree()
         

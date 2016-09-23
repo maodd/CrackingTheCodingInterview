@@ -29,7 +29,6 @@
 		61F1A6701B4D4C7000242D95 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61F1A66E1B4D4C7000242D95 /* Main.storyboard */; };
 		61F1A6721B4D4C7000242D95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 61F1A6711B4D4C7000242D95 /* Assets.xcassets */; };
 		61F1A6751B4D4C7000242D95 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61F1A6731B4D4C7000242D95 /* LaunchScreen.storyboard */; };
-		61F1A6801B4D4C7000242D95 /* InterviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F1A67F1B4D4C7000242D95 /* InterviewTests.m */; };
 		61F1A68B1B4D4C7000242D95 /* InterviewUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F1A68A1B4D4C7000242D95 /* InterviewUITests.m */; };
 		61F1A69A1B4D50CB00242D95 /* TestFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F1A6991B4D50CB00242D95 /* TestFile.swift */; };
 		61F1A69D1B4D659500242D95 /* CCIArraysAndStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F1A69C1B4D659500242D95 /* CCIArraysAndStrings.m */; };
@@ -40,6 +39,7 @@
 		61FAF9F11B7DBEA600E0A4FE /* DoublyLinkedNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FAF9F01B7DBEA600E0A4FE /* DoublyLinkedNode.m */; };
 		61FF13E71B7DC42C000A3A5C /* Stack.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FF13E61B7DC42C000A3A5C /* Stack.m */; };
 		61FF13F01B7DC9A6000A3A5C /* TwoStackQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 61FF13EF1B7DC9A6000A3A5C /* TwoStackQueue.m */; };
+		69496E5A1D95608000038EB8 /* InterviewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F1A67F1B4D4C7000242D95 /* InterviewTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,13 +101,13 @@
 		61F1A6741B4D4C7000242D95 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		61F1A6761B4D4C7000242D95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61F1A67B1B4D4C7000242D95 /* InterviewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterviewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		61F1A67F1B4D4C7000242D95 /* InterviewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterviewTests.m; sourceTree = "<group>"; };
+		61F1A67F1B4D4C7000242D95 /* InterviewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = InterviewTests.m; path = InterviewTests/InterviewTests.m; sourceTree = SOURCE_ROOT; };
 		61F1A6811B4D4C7000242D95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61F1A6861B4D4C7000242D95 /* InterviewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InterviewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		61F1A68A1B4D4C7000242D95 /* InterviewUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InterviewUITests.m; sourceTree = "<group>"; };
 		61F1A68C1B4D4C7000242D95 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61F1A6981B4D50CA00242D95 /* Interview-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Interview-Bridging-Header.h"; sourceTree = "<group>"; };
-		61F1A6991B4D50CB00242D95 /* TestFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFile.swift; sourceTree = "<group>"; };
+		61F1A6991B4D50CB00242D95 /* TestFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFile.swift; path = ../Interview/TestFile.swift; sourceTree = "<group>"; };
 		61F1A69B1B4D659500242D95 /* CCIArraysAndStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCIArraysAndStrings.h; path = "Classes/Chapter 1/CCIArraysAndStrings.h"; sourceTree = "<group>"; };
 		61F1A69C1B4D659500242D95 /* CCIArraysAndStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCIArraysAndStrings.m; path = "Classes/Chapter 1/CCIArraysAndStrings.m"; sourceTree = "<group>"; };
 		61F1A69E1B4D65B500242D95 /* InterviewTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InterviewTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -273,7 +273,7 @@
 				61F1A6691B4D4C7000242D95 /* AppDelegate.m */,
 				61F1A66B1B4D4C7000242D95 /* ViewController.h */,
 				61F1A66C1B4D4C7000242D95 /* ViewController.m */,
-				61F1A6991B4D50CB00242D95 /* TestFile.swift */,
+				61F1A67F1B4D4C7000242D95 /* InterviewTests.m */,
 				61F1A66E1B4D4C7000242D95 /* Main.storyboard */,
 				61F1A6711B4D4C7000242D95 /* Assets.xcassets */,
 				61F1A6731B4D4C7000242D95 /* LaunchScreen.storyboard */,
@@ -296,7 +296,7 @@
 		61F1A67E1B4D4C7000242D95 /* InterviewTests */ = {
 			isa = PBXGroup;
 			children = (
-				61F1A67F1B4D4C7000242D95 /* InterviewTests.m */,
+				61F1A6991B4D50CB00242D95 /* TestFile.swift */,
 				61F1A6811B4D4C7000242D95 /* Info.plist */,
 			);
 			path = InterviewTests;
@@ -490,7 +490,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Shawn Webster";
 				TargetAttributes = {
 					61F1A6611B4D4C7000242D95 = {
@@ -589,8 +589,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69496E5A1D95608000038EB8 /* InterviewTests.m in Sources */,
 				61F1A6A01B4D65B500242D95 /* CCIArraysAndStringsTests.swift in Sources */,
-				61F1A6801B4D4C7000242D95 /* InterviewTests.m in Sources */,
 				61FAF9ED1B7DBB2300E0A4FE /* CCIStacksAndQueuesTests.swift in Sources */,
 				6112E5CE1B7F3A9500758E1D /* CCITreesAndGraphsTests.swift in Sources */,
 				611C2DDB1B5E6CC4000E9B19 /* CCILinkedListsTests.swift in Sources */,
@@ -653,8 +653,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -680,6 +682,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -696,8 +699,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -716,6 +721,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

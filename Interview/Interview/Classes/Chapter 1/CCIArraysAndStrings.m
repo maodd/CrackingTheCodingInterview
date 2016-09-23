@@ -120,19 +120,19 @@ void reverse (char * buffer) {
     }
     
     //convert each word to a counted set of the number of characters (effectively, hash it)
-    NSCountedSet *set1 = [self permutationSet:string1];
-    NSCountedSet *set2 = [self permutationSet:string2];
+    NSMutableSet *set1 = [self permutationSet:string1];
+    NSMutableSet *set2 = [self permutationSet:string2];
     
     //effectively, compare the hash values: do they have the same number of each type of character
     return [set1 isEqualToSet:set2];
 }
 
-+ (NSCountedSet*) permutationSet:(NSString*)string {
-    NSCountedSet *set = [NSCountedSet new];
++ (NSMutableSet*) permutationSet:(NSString*)string {
+    NSMutableSet *set = [NSMutableSet new];
     
     for (NSInteger i=0; i<string.length; i++) {
         unichar c = [string characterAtIndex:i];
-        [set addObject:@(c)];
+        [set addObject:@(c)]; // NSSet doesn't have this addObject. (immutable)
     }
     
     return set;
@@ -151,7 +151,7 @@ void reverse (char * buffer) {
 
 //time: O(n) (walk string twice, worst case replace every character with %20)
 //space: O(n) (array of spaces, worst case all spaces)
-+ (void) encodeSpaces:(NSMutableString*)string length:(NSInteger)n {
++ (NSString *) encodeSpaces:(NSMutableString*)string{
     /* I could easily just [string stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
        but that's not really in the spirit of the task
     
@@ -170,26 +170,32 @@ void reverse (char * buffer) {
     NSInteger spaceIndex = NSNotFound;
     NSMutableArray *spaces = [NSMutableArray array];
     
-    for (NSInteger i=0; i<n; i++) {
+    for (NSInteger i=0; i<string.length; i++) {
         if ([string characterAtIndex:i] == ' ') {
             [spaces addObject:@(i)];
             spaceIndex = i;
         }
     }
-    
+    NSInteger i = 1;
+    NSMutableString * result = string.copy;
+    while (i <= spaces.count * 2) {
+       
+        result = [[result stringByAppendingString:@"/"] mutableCopy];
+        i ++;
+    }
     //EPF: could do spaces.count > 0, capture index then
     if (spaceIndex != NSNotFound) {
         
         //EPF: assert length >= given length + (2 * num spaces); or else we won't have enough room
         
-        for (NSInteger i=n-1; i>=0; i--) {
+        for (NSInteger i=string.length-1; i>=0; i--) {
             if (i > spaceIndex) {
                 NSRange rng = NSMakeRange(spaces.count * 2 + i, 1);
                 NSString *s = [string substringWithRange:NSMakeRange(i, 1)];
-                [string replaceCharactersInRange:rng withString:s];
+                [result replaceCharactersInRange:rng withString:s];
             } else if (i == spaceIndex) {
                 NSRange rng = NSMakeRange((spaces.count - 1) * 2 + i, 3);
-                [string replaceCharactersInRange:rng withString:@"%20"];
+                [result replaceCharactersInRange:rng withString:@"%20"];
                 
                 [spaces removeLastObject];
                 
@@ -201,6 +207,8 @@ void reverse (char * buffer) {
             } //else i < spaceIndex => something is messed up! <-- EPF: might as well break/return?
         }
     }
+    
+    return result;
 }
 
 /*! 1.5 Implement a method to perform basic string compression using the counts of repeated characters. For example, the string aabcccccaaa would become a2blc5a3. If the "compressed" string would not become smaller than the orig- inal string, your method should return the original string. */
@@ -210,12 +218,15 @@ void reverse (char * buffer) {
  */
 
 + (NSString*) compress:(NSString*)input {
+    // introduce compressedFlag
+    NSString *compressedFlag = @"zz";
+    
     //EPF: if (input.length > 0) { do the rest, if-length check } return input
     if (!input || input.length == 0) {
         return input;
     }
     
-    NSMutableString *compressed = [NSMutableString string];
+    NSMutableString *compressed = [NSMutableString stringWithString:compressedFlag];
     unichar c = [input characterAtIndex:0];
     NSUInteger count = 1;
     
@@ -229,13 +240,13 @@ void reverse (char * buffer) {
             }
             count++;
         } else {
-            [compressed appendFormat:@"%c%lu", c, count];
+            [self doneCompress:c count:count compressed:compressed];
             c = d;
             count = 1;
         }
     }
     
-    [compressed appendFormat:@"%c%lu", c, count];
+    [self doneCompress:c count:count compressed:compressed];
     
     if (compressed.length < input.length) {
         return compressed.copy;
@@ -244,6 +255,20 @@ void reverse (char * buffer) {
     return input;
 }
 
++ (void)doneCompress:(unichar)c count:(NSUInteger)count compressed:(NSMutableString *)compressed{
+    if (count == 1) {
+        if (c == '1') {
+            [compressed appendString:@"11"]; //escape 1
+        }else{
+            [compressed appendFormat:@"%c", c];
+        }
+    }else{
+        [compressed appendFormat:@"%c%lu", c, count];
+    }
+    
+ 
+
+}
 /*! 1.6 Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
  */
 /*
@@ -365,8 +390,8 @@ void reverse (char * buffer) {
 
 + (NSArray*) zeroedMatrix:(NSArray*)matrix {
     
-    NSUInteger n = matrix.count;
-    NSUInteger m = ((NSArray*)matrix.firstObject).count;
+    NSUInteger rowCount = matrix.count;
+    NSUInteger colCount = ((NSArray*)matrix.firstObject).count;
     
     NSMutableSet *zeroRows = [NSMutableSet set];
     NSMutableSet *zeroCols = [NSMutableSet set];
@@ -374,10 +399,10 @@ void reverse (char * buffer) {
     //EPF: why not enumerate
     
     //find all the elements that have an integer value of 0
-    for (NSUInteger i=0; i<n; i++) {
+    for (NSUInteger i=0; i<rowCount; i++) {
         NSArray *row = matrix[i];
         
-        for (NSUInteger j=0; j<m; j++) {
+        for (NSUInteger j=0; j<colCount; j++) {
             NSNumber *number = row[j];
             
             if (number.integerValue == 0) {
@@ -434,48 +459,56 @@ void reverse (char * buffer) {
 //O(1) space
 
 + (BOOL) rotatableString:(NSString*)string hasSubstring:(NSString*)substring {
-    BOOL isSubstring = NO;
+    
     
     //if it can't possibly be a substring don't check
     if ( ! (substring.length > string.length || substring.length == 0) ) {
         
-        //get the first character of the substring that we're trying to match
-        unichar sc = [substring characterAtIndex:0];
+        NSString * s1s1 = [string stringByAppendingString:string];
         
-        //for the length of the string, try to find the first subcharacter
-        for (NSInteger i=0; i<string.length; i++) {
-            
-            //get this character in string for comparison
-            unichar c = [string characterAtIndex:i];
-            
-            //if they're the same
-            if (c == sc) {
-                
-                //temporarily consider us to be a substring
-                isSubstring = YES;
-                
-                //iterate over the rest of the characters in the substring and compare it against future elements in the original string including wrapping
-                for (NSInteger j=1; j<substring.length; j++) {
-                    //if the two are not the same, this can't be a substring
-                    if ([substring characterAtIndex:j] != [string characterAtIndex:(i+j)%string.length]) {
-                        isSubstring = NO;
-                        //stop checking the rest of the substring, we already failed
-                        break;
-                    }
-                }
-                
-                //if we've been through the entire substring and we haven't set isSubstring to false, then it's a substring so stop iterating over the original
-                if (isSubstring) {
-                    break;
-                }
-            }
-        }
+        return [s1s1 containsString:substring];
     }
     
-    return isSubstring;
+    return NO;
 }
 
 
++ (NSArray *)possibleStrings:(NSString *)codedString {
+    NSMutableArray * results = [NSMutableArray array];
+    
+    NSMutableArray * alphabits = [NSMutableArray array];
+    for (char a = 'a'; a <= 'z'; a++)
+    {
+        [alphabits addObject:[NSString stringWithFormat:@"%c", a]];
+    }
+    
+    
+    NSMutableString * possible1 = [NSMutableString string];
+                       
+    for (int i = 0; i < codedString.length; i++) {
+        unichar c = [codedString characterAtIndex:i];
+        NSString * s = [NSString stringWithCharacters:&c length:1];
+        
+        NSUInteger index = [s integerValue];
+        [possible1 appendString:alphabits[index - 1]];
+     
+        
 
+    }
+    
+    NSMutableString * possible2 = [NSMutableString string];
+    for (int i = 0; i < codedString.length - 1; i++) {
+    
+        NSString * s = [codedString substringWithRange:NSMakeRange(i, 2)];
+        NSUInteger index = [s integerValue];
+        if (index < alphabits.count) {
+            [possible2 appendString:alphabits[index - 1]];
+        }
+        
+    }
+    
+    return @[possible1, possible2];
+    
+}
 
 @end
